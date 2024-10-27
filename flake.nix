@@ -10,18 +10,21 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
       let 
         pkgs = import nixpkgs { inherit system; };
-        texlive = pkgs.texlive.combine {
-          inherit (pkgs.texlive) scheme-small; # Base scheme
-          # Add any additional packages you need here
-          extraPackages = with pkgs.texlive; [ tikz ];
-        };
+        texlive = pkgs.texliveFull.withPackages (ps: [
+          ps.latexmk
+          #ps.pdflatex
+          ps.pgf # TikZ
+        ]);
       in
       {
+        packages.devShell = pkgs.stdenv.mkShell {
+          nativeBuildInputs = [ texlive ];
+        };
         packages.default = pkgs.stdenv.mkDerivation {
           name = "build-paper";
           src = ./.;
           
-          buildInputs = [ texlive ];
+          nativeBuildInputs = [ texlive ];
 
           buildPhase = ''
             latexmk -pdf paper.tex
