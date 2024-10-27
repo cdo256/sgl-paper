@@ -1,0 +1,15 @@
+\documentclass{article}
+\usepackage{svg}
+
+% Define a new command for the SVG glyph
+\newcommand{\mySvgGlyph}[1][]{%
+    \includesvg[#1]{yourfile} % Replace 'yourfile' with your SVG filename without extension
+}
+
+\begin{document}
+
+Here is an example of using an SVG glyph: \mySvgGlyph[width=0.5cm]
+
+You can also resize it: \mySvgGlyph[width=1cm]
+
+\end{document}
