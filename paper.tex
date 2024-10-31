@@ -1,15 +1,56 @@
 \documentclass{article}
 \usepackage{svg}
+\usepackage{tikz}
+%\usepackage{luatex}
+\usetikzlibrary{graphs}
+%\usetikzlibrary{graphdrawing}
+%\usegdlibrary{trees}
 
 % Define a new command for the SVG glyph
-\newcommand{\mySvgGlyph}[1][]{%
-    \includesvg[#1]{yourfile} % Replace 'yourfile' with your SVG filename without extension
+\newcommand{\localGlyph}[1][]{%
+    \includesvg[width=0.7em]{local-glyph.svg} % Replace 'yourfile' with your SVG filename without extension
 }
 
+%\begin{document}
+%A local (drawn \localGlyph ) represents something similar to a local variable.
+%$$\int^{\localGlyph}_{\localGlyph} x dx$$
+%$$\int^{\localGlyph}_{\localGlyph} x dx$$
+%{\Huge \localGlyph}
+
+\usetikzlibrary{arrows.meta}
+
+% Define a custom arrow tip
+\makeatletter
+\pgfarrowsdeclare{orthogonal}{orthogonal}
+{
+  \pgfutil@tempdima=0.5pt%
+  \advance\pgfutil@tempdima by0.5\pgflinewidth%
+  \pgfarrowsleftextend{-\pgfutil@tempdima}
+  \pgfarrowsrightextend{\pgfutil@tempdima}
+}
+{
+  \pgfpathmoveto{\pgfqpoint{-3pt}{-3pt}}
+  \pgfpathlineto{\pgfqpoint{3pt}{3pt}}
+  \pgfusepathqstroke
+}
+\makeatother
+
 \begin{document}
-foo
-% Here is an example of using an SVG glyph: \mySvgGlyph[width=0.5cm]
+\begin{tikzpicture}
 
-Y% ou can also resize it: \mySvgGlyph[width=1cm]
+% Use the custom arrow tip
+\draw[->, orthogonal] (0,0) -- (2,0);
 
+% Example graph with custom arrows
+\node (a) at (0,0) {a};
+\node (b) at (2,1) {b};
+\node (c) at (2,-1) {c};
+\node (d) at (4,0) {d};
+
+\draw[orthogonal-] (a) -- (b);
+\draw[orthogonal-] (a) -- (c);
+\draw[->] (b) -- (d);
+\draw[->] (c) -- (d);
+
+\end{tikzpicture}
 \end{document}

@@ -14,6 +14,8 @@
           ps.latexmk
           #ps.pdflatex
           ps.pgf # TikZ
+          pkgs.inkscape
+          ps.luatex
         ]);
       in
       {
@@ -27,7 +29,8 @@
           nativeBuildInputs = [ texlive ];
 
           buildPhase = ''
-            latexmk -pdf paper.tex
+            export XDG_CACHE_HOME=$(mktemp -d)
+            latexmk -pdf --shell-escape paper.tex
           '';
 
           installPhase = ''
