@@ -1,10 +1,12 @@
 TEXFILES := $(wildcard *.tex)
+
 OUTDIR := ./result
+PDFFILES := $(patsubst %.tex,$(OUTDIR)/%.pdf,$(TEXFILES))
 LATEXMKARGS := -interaction=nonstopmode
 
-all: $(TEXFILES:.tex=.pdf)
+all: $(PDFFILES)
 
-%.pdf: %.tex
+$(OUTDIR)/%.pdf: %.tex
 	@mkdir -p $(OUTDIR)
 	latexmk -pdf -output-directory=$(OUTDIR) $(LATEXMKARGS) $<
 
