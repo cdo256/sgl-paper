@@ -22,14 +22,8 @@
 \pgfdeclarearrow{
   name=BigGlyph,
   cache=false,
-  bending mode=orthogonal,
-  %setup code={
-  %  \pgfarrowssettipend{0ex}
-  %  \pgfarrowssetbackend{-4ex}
-  %  \pgfarrowssetvisualbackend{-3ex}
-  %  \pgfarrowssetlineend{-3ex}
-  %  \pgfarrowssetvisualtipend{0ex}
-  },
+  bending mode=none,
+
   drawing code={
     \pgfpathrectangle{\pgfpoint{-1.5ex}{-1ex}}{\pgfpoint{+2ex}{+2.5ex}}
     \pgfusepathqclip
