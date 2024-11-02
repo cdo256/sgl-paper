@@ -3,6 +3,22 @@
 \usetikzlibrary{graphs}
 \usetikzlibrary{arrows.meta}
 
+%\tracingall
+
+\pgfkeys{
+  /pgf/arrow keys/.cd,
+  glyph text/.code={%
+    \pgfarrowsaddtooptions{%
+      \def\cdo@glyph{#1}%
+    }%
+  },
+  glyph command/.code={%
+    \pgfarrowsaddtooptions{%
+      \def\cdo@glyph{\csname #1\endcsname}%
+    }%
+  }
+}
+
 \pgfdeclarearrow{
   name=BigGlyph,
   cache=false,
@@ -12,7 +28,7 @@
     \pgfusepathqclip
     \pgftransformxshift{+0.1ex}
     \pgftransformyshift{-0.8ex}
-    \pgftext[right,base]{$\mathsf{Z}$}
+    \pgftext[right,base]{$\cdo@glyph$}
   }
 }
 
@@ -26,18 +42,26 @@
     \pgfusepathqclip
     \pgftransformxshift{+0.1ex}
     \pgftransformyshift{-0.5ex}
-    \pgftext[right,base]{$\mathsf{p}$}
+    \pgftext[right,base]{$\cdo@glyph$}
   }
+}
+
+\pgfdeclarearrow{
+  name=phi,
+  means={SmallGlyph[glyph command=phi]}
 }
 
 \begin{document}
 \begin{tikzpicture}
     \node (A){A};
     \node (B)[right of=A] {B};
-    \node (E)[below of=A] {E};
+    \node (C)[below of=A] {C};
+    \node (D)[right of=C] {D};
+    \node (E)[below of=C] {E};
     \node (F)[right of=E] {F};
-    \draw [-{BigGlyph}] (A) to (B);
-    \draw [-{SmallGlyph}] (E) to (F);
+    \draw [-phi] (A) to (B);
+    \draw [-{SmallGlyph[glyph text=y]}] (C) to (D);
+    \draw [-{BigGlyph[glyph text=Z]}] (E) to (F);
 \end{tikzpicture}
 \end{document}
 
