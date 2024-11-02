@@ -22,7 +22,14 @@
 \pgfdeclarearrow{
   name=BigGlyph,
   cache=false,
-  bending mode=none,
+  bending mode=orthogonal,
+  %setup code={
+  %  \pgfarrowssettipend{0ex}
+  %  \pgfarrowssetbackend{-4ex}
+  %  \pgfarrowssetvisualbackend{-3ex}
+  %  \pgfarrowssetlineend{-3ex}
+  %  \pgfarrowssetvisualtipend{0ex}
+  },
   drawing code={
     \pgfpathrectangle{\pgfpoint{-1.5ex}{-1ex}}{\pgfpoint{+2ex}{+2.5ex}}
     \pgfusepathqclip
@@ -60,8 +67,9 @@
     \node (E)[below of=C] {E};
     \node (F)[right of=E] {F};
     \draw [-phi] (A) to (B);
-    \draw [-{SmallGlyph[glyph text=y]}] (C) to (D);
-    \draw [-{BigGlyph[glyph text=Z]}] (E) to (F);
-\end{tikzpicture}
+    %\draw [-{BigGlyph[glyph text=2]}] (C) to (D);
+    \draw (E) edge[out=0,in=180,-{BigGlyph[glyph text=3]}] (D);
+    %\draw (E) edge[out=0,in=180,-Stealth] (D);
+  \end{tikzpicture}
 \end{document}
 
