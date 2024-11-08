@@ -3,70 +3,62 @@
 \usepackage{tikz}
 \usetikzlibrary{graphs}
 \usetikzlibrary{arrows.meta}
-
-% Define a new command for the SVG glyph
-\newcommand{\localGlyph}[1][]{%
-    \includesvg[width=0.7em]{local-glyph.svg} % Replace 'yourfile' with your SVG filename without extension
-}
-
-\pgfdeclarearrow{
-    name = 0,
-    means = {Arc Barb[arc=360]}
-}
-
-
-\pgfdeclarearrow{
-    name = 1,
-    parameters = { \the\pgfarrowlength },
-    setup code = {
-        \pgfarrowssettipend{0\pgfarrowlength}
-        \pgfarrowssetlineend{0\pgfarrowlength}
-        \pgfarrowssetvisualbackend{-1\pgfarrowlength}
-        \pgfarrowssetbackend{-1\pgfarrowlength}
-        \pgfarrowshullpoint{0\pgfarrowlength}{0pt}
-        \pgfarrowshullpoint{-.5\pgfarrowlength}{.5\pgfarrowlength}
-        \pgfarrowshullpoint{-1\pgfarrowlength}{0pt}
-        \pgfarrowshullpoint{-.5\pgfarrowlength}{-.5\pgfarrowlength}
-        \pgfarrowssavethe\pgfarrowlength
-    },
-    drawing code = {
-        \pgfpathmoveto{\pgfqpoint{-.5\pgfarrowlength}{.5\pgfarrowlength}}
-        \pgfpathlineto{\pgfqpoint{-.5\pgfarrowlength}{-.5\pgfarrowlength}}
-        \pgfusepathqstroke
-    },
-    defaults = { length = 0.5em }
-}
-
-\pgfdeclarearrow{%
-  name=Glyph,%
-  cache=false,%
-  bending mode=none,%
-  setup code={%
-    \pgfarrowssettipend{0ex}},%
-  drawing code={%
-    \pgfpathrectangle{\pgfpoint{-2.0ex}{-1ex}}{\pgfpoint{+3.9ex}{+2ex}}%
-    \pgfusepathqclip%
-    \pgftransformxshift{+.1ex}%
-    \pgftransformyshift{+-0.5ex}%
-    \pgftext[right,base]{x}%
-  }%
-}
+\usepackage{cite}
+\input{library/sgl.tex}
 
 \begin{document}
-\begin{tikzpicture}
-\tikz{
-    \node (A){A};
-    \node (B)[right of=A] {B};
-    \node (C)[below of=A] {C};
-    \node (D)[right of=C] {D};
-    \node (E)[below of=C] {E};
-    \node (F)[right of=E] {F};
-    \draw [-0] (A) to (B);
-    \draw [-1] (C) to (D);
-    \draw [-{Glyph}] (E) to (F);
-    \draw [-{Glyph}] (E) to (C);
-}
 
-\end{tikzpicture}
+\section{Syntax Representations with Variable Binding}
+Programs such as proof assistants, SMT solvers and compilers that operate on
+complex data-structures all require a representation of bound-variables. Many
+attempts have been made to formalize the semantics of variable binding,
+including category-theoretic models, Higher-Order Abstract Syntax (HOAS),
+Nominal Techniques, De Bruijn Indices, first-order/nameful paradigms, and
+graphical representations. 
+
+In representing abstract syntax with variable binding, several models and
+schools of thought have been developed. This section reviews some of the
+principal approaches in the literature.
+
+\subsection{Syntax Graph Models}
+Syntax graph models represent syntax structures as graphs, where nodes
+correspond to operations or constructs and edges denote the relationships or
+bindings between them. These models are particularly effective for visualizing
+intricate dependencies and relationships in syntax.
+
+\subsection{Category Theoretic Models}
+Category theory offers a rigorous mathematical framework for modeling syntax
+with variable binding. In this approach, categories of models correspond to
+binding signatures, with each model comprising variable sets endowed with
+algebraic and substitution structures. This method enables an abstract,
+compositional treatment of syntax, supporting initial algebra semantics and
+facilitating semantic substitution lemmas \cite{fiore99cat}.
+
+\subsection{Higher-Order Abstract Syntax (HOAS)}
+Higher-Order Abstract Syntax (HOAS) employs the binding mechanisms of the typed
+lambda calculus to represent various forms of binding. This technique shifts the
+complexity of variable binding to the meta-level, thereby ensuring uniform
+handling of properties like renaming and substitution. Nevertheless, it
+introduces challenges for structural recursion and induction \cite{gabby02hoas}.
+
+\subsection{Nominal Techniques}
+Nominal techniques explicitly use names to handle variable binding, often
+leveraging permutation models or nominal sets. This approach aids in reasoning
+about alpha-equivalence and fresh name generation, making it especially suitable
+for formal systems involving variable-binding operations \cite{pitts16nominal}.
+
+\subsection{De Bruijn Indices}
+De Bruijn indices provide a nameless representation of variables, using numeric
+indices to signify variable scopes. This technique simplifies alpha-equivalence
+handling, though it can make the syntax less intuitive to human readers
+\cite{bruijn}.
+
+Each of these approaches presents distinct advantages and limitations. The
+choice of model often depends on specific application requirements, including
+ease of reasoning, computational efficiency, and human readability.
+
+bibliography{paper}{}
+\bibliographystyle{plain}
 \end{document}
+
 
