@@ -39,7 +39,7 @@ Higher-Order Abstract Syntax (HOAS) employs the binding mechanisms of the typed
 lambda calculus to represent various forms of binding. This technique shifts the
 complexity of variable binding to the meta-level, thereby ensuring uniform
 handling of properties like renaming and substitution. Nevertheless, it
-introduces challenges for structural recursion and induction \cite{gabby02hoas}.
+introduces challenges for structural recursion and induction \cite{gabbay02hoas}.
 
 \subsection{Nominal Techniques}
 Nominal techniques explicitly use names to handle variable binding, often
@@ -51,7 +51,7 @@ for formal systems involving variable-binding operations \cite{pitts16nominal}.
 De Bruijn indices provide a nameless representation of variables, using numeric
 indices to signify variable scopes. This technique simplifies alpha-equivalence
 handling, though it can make the syntax less intuitive to human readers
-\cite{bruijn}.
+\cite{bruijn72lambda}.
 
 Each of these approaches presents distinct advantages and limitations. The
 choice of model often depends on specific application requirements, including
@@ -60,5 +60,3 @@ ease of reasoning, computational efficiency, and human readability.
 \bibliography{paper}{}
 \bibliographystyle{plain}
 \end{document}
-
-
