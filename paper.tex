@@ -61,14 +61,11 @@ ease of reasoning, computational efficiency, and human readability.
 Semantic graphs are graphs like the below:
 
 \begin{tikzpicture}
-%\node (s1) {+};
-%\node (2) {2};
-%\node (3) {3};
-%\draw [-0] (2) to (3);
-\node {a}} {
-    child {node {3} edge from parent[dashed]}
-    %child {node {2} edge from parent[-{Circle}]}
-};
+\node {+}
+    %child {node {b}};
+    child {node {3} edge from parent[-0]}
+    child {node {2} edge from parent[-1]}
+    ;
 \end{tikzpicture}
 
 \bibliography{paper}{}
