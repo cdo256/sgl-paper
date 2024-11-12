@@ -1,14 +1,19 @@
 \documentclass{article}
 \usepackage{svg}
 \usepackage{tikz}
+\usepackage{authblk}
 \usetikzlibrary{graphs}
 \usetikzlibrary{arrows.meta}
+
 \usepackage{cite}
 \input{library/sgl.tex}
 
+\title{SGL - A Natural Graphical Meta-Language and Rewriting System}
+\author[1]{Christina O'Donnell }%\\ \href{mailto:cdo@mutix.org}{cdo@mutix.org}}
+\affil[1]{Univerisity of Nottingham}
 \begin{document}
-
-\section{Syntax Representations with Variable Binding}
+\maketitle
+\section{Introduction}
 Programs such as proof assistants, SMT solvers and compilers that operate on
 complex data-structures all require a representation of bound-variables. Many
 attempts have been made to formalize the semantics of variable binding,
@@ -16,17 +21,34 @@ including category-theoretic models, Higher-Order Abstract Syntax (HOAS),
 Nominal Techniques, De Bruijn Indices, first-order/nameful paradigms, and
 graphical representations. 
 
+\subsection{Desiderata}
+
+Let's start by defining 'nice' properties that we want the machine to have. We pick features 
+
+We want the following features:
+
+\begin{itemize}
+    \item No special constructs.
+    \item Trivial capture-avoiding substitution. 
+    \item Symmetry preserviing.
+    \item Able to encode 'high-level' structures and algorithms.
+    \item Relies on structure rather than name for variable binding.
+    \item Cross-simulation.
+    \item Cross-paradigm expressiveness.
+\end{itemize}
+
+\subsection{Other Approaches}
 In representing abstract syntax with variable binding, several models and
 schools of thought have been developed. This section reviews some of the
 principal approaches in the literature.
 
-\subsection{Syntax Graph Models}
+\subsubsection{Syntax Graph Models}
 Syntax graph models represent syntax structures as graphs, where nodes
 correspond to operations or constructs and edges denote the relationships or
 bindings between them. These models are particularly effective for visualizing
 intricate dependencies and relationships in syntax.
 
-\subsection{Category Theoretic Models}
+\subsubsection{Category Theoretic Models}
 Category theory offers a rigorous mathematical framework for modeling syntax
 with variable binding. In this approach, categories of models correspond to
 binding signatures, with each model comprising variable sets endowed with
@@ -34,20 +56,20 @@ algebraic and substitution structures. This method enables an abstract,
 compositional treatment of syntax, supporting initial algebra semantics and
 facilitating semantic substitution lemmas \cite{fiore99cat}.
 
-\subsection{Higher-Order Abstract Syntax (HOAS)}
+\subsubsection{Higher-Order Abstract Syntax (HOAS)}
 Higher-Order Abstract Syntax (HOAS) employs the binding mechanisms of the typed
 lambda calculus to represent various forms of binding. This technique shifts the
 complexity of variable binding to the meta-level, thereby ensuring uniform
 handling of properties like renaming and substitution. Nevertheless, it
 introduces challenges for structural recursion and induction \cite{gabbay02hoas}.
 
-\subsection{Nominal Techniques}
+\subsubsection{Nominal Techniques}
 Nominal techniques explicitly use names to handle variable binding, often
 leveraging permutation models or nominal sets. This approach aids in reasoning
 about alpha-equivalence and fresh name generation, making it especially suitable
 for formal systems involving variable-binding operations \cite{pitts16nominal}.
 
-\subsection{De Bruijn Indices}
+\subsubsection{De Bruijn Indices}
 De Bruijn indices provide a nameless representation of variables, using numeric
 indices to signify variable scopes. This technique simplifies alpha-equivalence
 handling, though it can make the syntax less intuitive to human readers
@@ -57,16 +79,25 @@ Each of these approaches presents distinct advantages and limitations. The
 choice of model often depends on specific application requirements, including
 ease of reasoning, computational efficiency, and human readability.
 
+\subsection{Contributions}
+%TODO
+
 \section{Defining Semantic Graph Language}
+
+\subsection{Some new notation}
+
 Semantic graphs are graphs like the below:
 
 \begin{tikzpicture}
 \node {+}
-    %child {node {b}};
     child {node {3} edge from parent[-0]}
     child {node {2} edge from parent[-1]}
     ;
 \end{tikzpicture}
+
+\subsection{The predicate $L$}
+
+\section{Graphical Pattern calculus}
 
 \bibliography{paper}{}
 \bibliographystyle{plain}

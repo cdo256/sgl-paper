@@ -6,7 +6,7 @@ LATEXMKARGS := -interaction=nonstopmode
 
 all: $(PDFFILES)
 
-$(OUTDIR)/%.pdf: %.tex
+$(OUTDIR)/%.pdf: %.tex library/*.tex
 	@mkdir -p $(OUTDIR)
 	latexmk -pdf -output-directory=$(OUTDIR) $(LATEXMKARGS) $<
 
