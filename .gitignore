@@ -20,3 +20,4 @@
 .*.swp  # Vim swap files
 result
 svg-inkscape
+.direnv/*
