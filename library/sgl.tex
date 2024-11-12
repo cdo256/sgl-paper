@@ -75,6 +75,13 @@
     defaults = { length = 0.5em }
 }
 
+\tikzset{pigstail/.style={
+  ->,distance=5mm,looseness=8,shorten >=1pt
+  %\pgfextra{\let\tikztotarget=\tikztostart}
+  %[looseness=8,distance=5mm,every loop]
+  %\tikz@to@curve@path
+}}
+
 \pgfdeclarearrow{name=2,means={BigGlyph[glyph text=2]}}
 \pgfdeclarearrow{name=3,means={BigGlyph[glyph text=3]}}
 \pgfdeclarearrow{name=4,means={BigGlyph[glyph text=4]}}
