@@ -20,7 +20,10 @@
       in
       {
         packages.devShell = pkgs.stdenv.mkShell {
-          nativeBuildInputs = [ texlive ];
+          nativeBuildInputs = [ 
+            pkgs.gnumake
+            texlive
+          ];
         };
         packages.default = pkgs.stdenv.mkDerivation {
           name = "build-paper";
