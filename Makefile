@@ -2,7 +2,7 @@ TEXFILES := $(wildcard *.tex)
 
 OUTDIR := ./result
 PDFFILES := $(patsubst %.tex,$(OUTDIR)/%.pdf,$(TEXFILES))
-LATEXMKARGS := -interaction=nonstopmode
+LATEXMKARGS := -interaction=nonstopmode -silent
 
 all: $(PDFFILES)
 
