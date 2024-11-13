@@ -4,15 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs"; # Use the latest Nixpkgs
     flake-utils.url = "github:numtide/flake-utils"; # Utility functions for flakes
+    lipics.url = "github:cdo256/lipics-authors";
   };
 
-  outputs = { self, nixpkgs, flake-utils }: 
+  outputs = { self, nixpkgs, flake-utils, lipics }: 
     flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
       let 
         pkgs = import nixpkgs { inherit system; };
         texlive = pkgs.texliveFull.withPackages (ps: [
           ps.latexmk
-          #ps.pdflatex
           ps.pgf # TikZ
           pkgs.inkscape
           ps.luatex
