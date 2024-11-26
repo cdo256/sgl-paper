@@ -8,14 +8,15 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, lipics }: 
-    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
+    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let 
         pkgs = import nixpkgs { inherit system; };
         texlive = pkgs.texliveFull.withPackages (ps: [
           ps.latexmk
           ps.pgf # TikZ
           pkgs.inkscape
-          ps.luatex
+          #ps.luatex
+          lipics.packages.${system}.lipics
         ]);
       in
       {
