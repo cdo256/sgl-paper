@@ -16,23 +16,29 @@
           #ps.pgf # TikZ
           #pkgs.inkscape
           #ps.luatex
-          lipics.packages.${system}.default
         ]);
+        fucker = 
+            pkgs.texlive.combine {
+              inherit (pkgs.texlive) scheme-full;
+              inherit (lipics.packages."x86_64-linux") default;
+            };
       in
       {
-        packages.devShell = pkgs.stdenv.mkShell {
-          nativeBuildInputs = [ 
-            pkgs.gnumake
-            texlive
-          ];
-        };
+        #packages.devShell = pkgs.stdenv.mkShell {
+        #  nativeBuildInputs = [ 
+        #    pkgs.gnumake
+        #    texlive
+        #  ];
+        #};
         packages.default = pkgs.stdenv.mkDerivation {
           name = "build-paper";
           src = ./.;
           
           nativeBuildInputs = [
-            texlive
-            #pkgs.texlivePackages.latexmk
+            #texlive
+            ##pkgs.texlivePackages.latexmk
+	    #lipics.packages.${system}.default
+            fucker
           ];
 
           buildInputs = [
