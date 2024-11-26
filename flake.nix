@@ -16,7 +16,7 @@
           ps.pgf # TikZ
           pkgs.inkscape
           #ps.luatex
-          lipics.packages.${system}.lipics
+          lipics.packages.${system}.default
         ]);
       in
       {
