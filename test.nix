@@ -11,19 +11,16 @@
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let 
         pkgs = import nixpkgs { inherit system; };
-        texlive = pkgs.texliveFull.withPackages (ps: [
-          ps.latexmk
-          #ps.pgf # TikZ
-          #pkgs.inkscape
-          #ps.luatex
-          lipics.packages.${system}.default
-        ]);
+        texlivePackages = pkgs.texlive.combine {
+          inherit (pkgs.texlive) scheme-full;
+          packages = [ lipics.packages.${system}.default ];
+        };
       in
       {
         packages.devShell = pkgs.stdenv.mkShell {
           nativeBuildInputs = [ 
             pkgs.gnumake
-            texlive
+            texlivePackages
           ];
         };
         packages.default = pkgs.stdenv.mkDerivation {
@@ -31,19 +28,13 @@
           src = ./.;
           
           nativeBuildInputs = [
-            texlive
-            #pkgs.texlivePackages.latexmk
+            texlivePackages
           ];
 
-          buildInputs = [
-            #texlive
-            #pkgs.texlivePackages.latexmk
-          ];
-         
           buildPhase = ''
             export XDG_CACHE_HOME=$(mktemp -d)
-            echo $PATH
-            latexmk -pdf --shell-escape paper.tex
+            pdflatex paper.tex
+            #latexmk -pdf --shell-escape paper.tex
           '';
 
           installPhase = ''
