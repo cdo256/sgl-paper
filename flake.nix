@@ -2,7 +2,7 @@
   description = "A Nix flake to build a LaTeX document using TeX Live and TikZ";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs"; # Use the latest Nixpkgs
+    nixpkgs.url = "github:NixOS/nixpkgs";
   };
 
   outputs = { self, nixpkgs }:
