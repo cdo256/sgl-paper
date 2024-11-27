@@ -14,10 +14,12 @@
         pname = "lipics";
         src = ./lipics;
         outputs = [ "out" "tex" ];
+        phases = [ "installPhase" ];
         installPhase = ''
-          mkdir -p $out/share/texmf/tex/latex/lipics/
+          #mkdir -p $out/share/texmf/tex/latex/lipics/
+          mkdir -p $out/.ensure
           mkdir -p $tex/tex/latex/lipics/
-          cp *.cls $out/share/texmf/tex/latex/lipics/
+          #cp *.cls $out/share/texmf/tex/latex/lipics/
           cp *.cls $tex/tex/latex/lipics/
         '';
       };
